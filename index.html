@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZID — Fotografía & Vídeo</title>
+<meta name="description" content="ZID — Portfolio de fotografía y vídeo. Interiorismo, producto, eventos y comercial. Más de 10 años de experiencia en España.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --ink-2:#111111;
+    --paper:#f2f0ec;
+    --dim:#8f8c85;
+    --brass:#c79a4b;
+    --brass-soft:#dcb877;
+    --line:rgba(242,240,236,.12);
+    --max:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Archivo',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Archivo Expanded','Archivo',sans-serif;letter-spacing:-0.02em;}
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,48px);}
+  ::selection{background:var(--brass);color:var(--ink);}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s,backdrop-filter .35s,padding .35s,border-color .35s;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:rgba(10,10,10,.82);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom-color:var(--line);
+    padding-top:12px;padding-bottom:12px;
+  }
+  .logo{
+    font-family:'Archivo Expanded','Archivo',sans-serif;
+    font-weight:800;font-size:1.35rem;letter-spacing:.14em;
+    text-decoration:none;
+  }
+  .logo span{color:var(--brass);}
+  .nav-right{display:flex;align-items:center;gap:clamp(14px,2.5vw,30px);}
+  .navlinks{display:flex;gap:clamp(14px,2.5vw,30px);list-style:none;}
+  .navlinks a{
+    text-decoration:none;font-size:.8rem;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--paper);
+    opacity:.75;transition:opacity .2s,color .2s;
+  }
+  .navlinks a:hover{opacity:1;color:var(--brass-soft);}
+  .langswitch{display:flex;gap:8px;}
+  .langswitch button{
+    background:none;border:1px solid var(--line);border-radius:20px;
+    padding:4px 10px;cursor:pointer;color:var(--paper);
+    font-family:'Archivo',sans-serif;font-size:.7rem;font-weight:600;
+    letter-spacing:.08em;opacity:.55;transition:.2s;
+  }
+  .langswitch button:hover{opacity:.9;}
+  .langswitch button.active{opacity:1;border-color:var(--brass);color:var(--brass-soft);}
+  @media (max-width:760px){
+    .navlinks{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;min-height:100svh;
+    display:flex;align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('https://zidportfolio.netlify.app/images/eventos-05.jpg') center 35%/cover no-repeat;
+    transform:scale(1.06);
+    animation:heroZoom 14s ease-out forwards;
+  }
+  @keyframes heroZoom{to{transform:scale(1);}}
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(10,10,10,.45) 0%,rgba(10,10,10,.15) 40%,rgba(10,10,10,.92) 100%);
+  }
+  .hero-content{
+    position:relative;z-index:2;width:100%;
+    padding-bottom:clamp(48px,8vh,96px);
+  }
+  .hero-kicker{
+    font-size:.78rem;font-weight:600;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--brass-soft);margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(3.4rem,11vw,9rem);
+    font-weight:800;line-height:.95;letter-spacing:-.01em;
+  }
+  .hero-sub{
+    margin-top:22px;font-size:clamp(1rem,1.6vw,1.2rem);
+    color:var(--paper);opacity:.82;max-width:520px;font-weight:400;
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;text-decoration:none;
+    font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:15px 30px;border-radius:40px;transition:.25s;
+  }
+  .btn-primary{background:var(--brass);color:var(--ink);}
+  .btn-primary:hover{background:var(--brass-soft);transform:translateY(-2px);}
+  .btn-ghost{border:1px solid rgba(242,240,236,.4);color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--paper);transform:translateY(-2px);}
+  .scroll-hint{
+    position:absolute;right:clamp(20px,4vw,48px);bottom:clamp(48px,8vh,96px);z-index:2;
+    writing-mode:vertical-rl;font-size:.7rem;letter-spacing:.3em;
+    text-transform:uppercase;opacity:.5;
+  }
+  @media (max-width:760px){.scroll-hint{display:none;}}
+
+  /* ---------- Stats band ---------- */
+  .stats-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-2);}
+  .stats-band .wrap{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;padding-top:44px;padding-bottom:44px;text-align:center;
+  }
+  .stat .num{
+    font-family:'Archivo Expanded','Archivo',sans-serif;
+    font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;color:var(--brass);
+  }
+  .stat .label{
+    margin-top:6px;font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--dim);
+  }
+
+  /* ---------- Banner strip ---------- */
+  .banner-strip{line-height:0;border-bottom:1px solid var(--line);}
+  .banner-strip img{width:100%;}
+
+  /* ---------- Sections ---------- */
+  .section{padding:clamp(72px,10vw,130px) 0;}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(34px,5vw,60px);flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(2rem,5vw,3.6rem);font-weight:800;}
+  .section-head .count{color:var(--dim);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;}
+  .section-head .count b{color:var(--brass);font-weight:600;}
+
+  /* ---------- Videos ---------- */
+  #videos{background:var(--ink);}
+  .video-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:clamp(14px,2.5vw,28px);
+  }
+  .video-cell{
+    position:relative;border-radius:10px;overflow:hidden;
+    background:#000;aspect-ratio:16/9;
+    border:1px solid var(--line);
+  }
+  .video-cell iframe{
+    position:absolute;inset:0;width:100%;height:100%;border:0;
+  }
+  @media (max-width:720px){.video-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Photography ---------- */
+  #fotografia{background:var(--ink-2);}
+  .filters{display:flex;gap:10px;flex-wrap:wrap;}
+  .filter-btn{
+    background:none;border:1px solid var(--line);border-radius:30px;
+    padding:9px 20px;cursor:pointer;color:var(--paper);
+    font-family:'Archivo',sans-serif;font-size:.76rem;font-weight:500;
+    letter-spacing:.1em;text-transform:uppercase;opacity:.65;transition:.2s;
+  }
+  .filter-btn:hover{opacity:1;}
+  .filter-btn.active{opacity:1;background:var(--paper);color:var(--ink);border-color:var(--paper);font-weight:600;}
+  .gallery{
+    columns:3;column-gap:16px;
+  }
+  @media (max-width:1000px){.gallery{columns:2;}}
+  @media (max-width:560px){.gallery{columns:1;}}
+  .ph{
+    break-inside:avoid;margin-bottom:16px;position:relative;
+    overflow:hidden;border-radius:8px;cursor:zoom-in;background:#000;
+  }
+  .ph img{
+    width:100%;transition:transform .6s cubic-bezier(.2,.6,.2,1),opacity .4s;
+    opacity:0;
+  }
+  .ph img.loaded{opacity:1;}
+  .ph:hover img{transform:scale(1.045);}
+  .ph::after{
+    content:attr(data-label);
+    position:absolute;left:0;right:0;bottom:0;
+    padding:34px 16px 13px;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.72));
+    font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    opacity:0;transition:opacity .3s;pointer-events:none;
+  }
+  .ph:hover::after{opacity:1;}
+  .ph.hidden{display:none;}
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(5,5,5,.96);
+    display:none;align-items:center;justify-content:center;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:92vw;max-height:84vh;object-fit:contain;border-radius:6px;}
+  .lb-cap{
+    position:absolute;bottom:28px;left:0;right:0;text-align:center;
+    font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+  }
+  .lb-btn{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(242,240,236,.08);border:1px solid var(--line);
+    color:var(--paper);width:52px;height:52px;border-radius:50%;
+    font-size:1.3rem;cursor:pointer;transition:.2s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lb-btn:hover{background:var(--brass);color:var(--ink);border-color:var(--brass);}
+  .lb-prev{left:20px;}
+  .lb-next{right:20px;}
+  .lb-close{
+    position:absolute;top:22px;right:22px;transform:none;
+    font-size:1.1rem;
+  }
+  @media (max-width:640px){
+    .lb-btn{width:44px;height:44px;}
+    .lb-prev{left:10px;}.lb-next{right:10px;}
+  }
+
+  /* ---------- About ---------- */
+  #sobre-mi{background:var(--ink);}
+  .about-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;
+    gap:clamp(40px,6vw,90px);align-items:center;
+  }
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid h2{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;margin-bottom:26px;}
+  .about-grid p{color:var(--dim);margin-bottom:18px;font-size:1.02rem;}
+  .about-grid p strong{color:var(--paper);font-weight:500;}
+  .about-photo{
+    border-radius:12px;overflow:hidden;border:1px solid var(--line);
+    transform:rotate(1.2deg);transition:transform .5s;
+  }
+  .about-photo:hover{transform:rotate(0);}
+  .about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;}
+
+  /* ---------- Contact ---------- */
+  #contacto{
+    background:linear-gradient(180deg,var(--ink-2),#000);
+    border-top:1px solid var(--line);
+    text-align:center;padding:clamp(90px,13vw,160px) 0 60px;
+  }
+  #contacto h2{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:800;margin-bottom:14px;}
+  #contacto h2 span{color:var(--brass);}
+  #contacto .sub{color:var(--dim);margin-bottom:44px;font-size:1.05rem;}
+  .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:70px;}
+  .contact-links a{
+    display:inline-flex;align-items:center;gap:10px;
+    text-decoration:none;border:1px solid var(--line);border-radius:40px;
+    padding:15px 28px;font-size:.9rem;font-weight:500;transition:.25s;
+  }
+  .contact-links a:hover{border-color:var(--brass);color:var(--brass-soft);transform:translateY(-2px);}
+  .foot-note{color:var(--dim);font-size:.78rem;letter-spacing:.1em;}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="logo" href="#top">ZID<span>.</span></a>
+  <div class="nav-right">
+    <ul class="navlinks">
+      <li><a href="#fotografia" data-i18n="nav_photo">Fotografía</a></li>
+      <li><a href="#videos" data-i18n="nav_work">Vídeos</a></li>
+      <li><a href="#sobre-mi" data-i18n="nav_about">Sobre mí</a></li>
+      <li><a href="https://instagram.com/javi_icecid" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+    </ul>
+    <div class="langswitch">
+      <button data-lang="es" class="active">ES</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="it">IT</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content wrap">
+    <p class="hero-kicker" data-i18n="hero_kicker">Fotografía &amp; Vídeo — España</p>
+    <h1>ZID</h1>
+    <p class="hero-sub" data-i18n="hero_sub">Interiorismo, producto, eventos y comercial. Contenido audiovisual que transmite y conecta.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#fotografia" data-i18n="hero_cta1">Ver portfolio</a>
+      <a class="btn btn-ghost" href="#contacto" data-i18n="hero_cta2">Hablemos</a>
+    </div>
+  </div>
+  <div class="scroll-hint" data-i18n="scroll">Desliza</div>
+</header>
+
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stat reveal"><div class="num">+100</div><div class="label" data-i18n="stat1_label">proyectos entregados</div></div>
+    <div class="stat reveal"><div class="num">10</div><div class="label" data-i18n="stat2_label">años de experiencia</div></div>
+    <div class="stat reveal"><div class="num">12</div><div class="label" data-i18n="stat3_label">ciudades donde filmé</div></div>
+  </div>
+</div>
+
+<div class="banner-strip"><img src="https://zidportfolio.netlify.app/images/banner.jpg" alt="ZID" loading="lazy"></div>
+
+<section class="section" id="videos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-i18n="video_title">Vídeos</h2>
+      <span class="count"><b>06</b> <span data-i18n="video_count">piezas</span></span>
+    </div>
+    <div class="video-grid">
+      <div class="video-cell reveal"><iframe src="https://player.vimeo.com/video/1225212259" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="video-cell reveal"><iframe src="https://player.vimeo.com/video/1225205182" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="video-cell reveal"><iframe src="https://player.vimeo.com/video/1225211626" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="video-cell reveal"><iframe src="https://player.vimeo.com/video/1225218612" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="video-cell reveal"><iframe src="https://player.vimeo.com/video/1225202700" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="video-cell reveal"><iframe src="https://player.vimeo.com/video/1225237116" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fotografia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-i18n="photo_title">Fotografía</h2>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all" data-i18n="pf_all">Todas</button>
+        <button class="filter-btn" data-filter="interiorismo" data-i18n="pf_interiorismo">Interiorismo</button>
+        <button class="filter-btn" data-filter="producto" data-i18n="pf_producto">Producto</button>
+        <button class="filter-btn" data-filter="eventos" data-i18n="pf_eventos">Eventos</button>
+        <button class="filter-btn" data-filter="comercial" data-i18n="pf_comercial">Comercial</button>
+      </div>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<section class="section" id="sobre-mi">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <h2 data-i18n="about_title">Sobre mí</h2>
+        <p data-i18n="about_p1">Profesional del sector audiovisual, con más de 10 años de experiencia en fotografía y vídeo en España, trabajando con clientes, marcas y proyectos de diferentes sectores.</p>
+        <p data-i18n="about_p2">Mi forma de trabajar se basa en una idea muy sencilla: cada cliente es diferente y cada proyecto necesita una solución diferente. Por eso me adapto al 100% a las necesidades de cada trabajo, cuidando cada detalle desde la primera idea hasta el resultado final.</p>
+        <p data-i18n="about_p3">Más que simplemente hacer fotos o vídeos, busco entender lo que necesitas, aportar mi experiencia y convertir una idea en contenido que realmente transmita y conecte.</p>
+      </div>
+      <div class="about-photo reveal">
+        <img src="https://zidportfolio.netlify.app/images/comercial-01.jpg" alt="ZID" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap">
+    <h2 class="reveal"><span data-i18n="contact_title_a">¿Tienes un proyecto</span><br><span data-i18n="contact_title_b">en mente?</span></h2>
+    <p class="sub reveal" data-i18n="contact_sub">Cuéntame tu idea y la convertimos en contenido que conecte.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:Zidcontactmedia@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        Zidcontactmedia@gmail.com
+      </a>
+      <a href="tel:+34663340999">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.79.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.84.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg>
+        +34 663 340 999
+      </a>
+      <a href="https://instagram.com/javi_icecid" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+        Instagram
+      </a>
+    </div>
+    <p class="foot-note" data-i18n="foot_note">© 2026 ZID — Videógrafo.</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Cerrar">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Anterior">←</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Siguiente">→</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+/* ---------- Gallery data ---------- */
+const BASE = 'https://zidportfolio.netlify.app/images/';
+const CATS = [
+  {key:'interiorismo', count:17},
+  {key:'producto', count:18},
+  {key:'eventos', count:19},
+  {key:'comercial', count:19},
+];
+const I18N = {
+  es: {
+    nav_photo:'Fotografía', nav_work:'Vídeos', nav_about:'Sobre mí', nav_contact:'Contacto',
+    hero_kicker:'Fotografía & Vídeo — España',
+    hero_sub:'Interiorismo, producto, eventos y comercial. Contenido audiovisual que transmite y conecta.',
+    hero_cta1:'Ver portfolio', hero_cta2:'Hablemos', scroll:'Desliza',
+    stat1_label:'proyectos entregados', stat2_label:'años de experiencia', stat3_label:'ciudades donde filmé',
+    video_title:'Vídeos', video_count:'piezas',
+    photo_title:'Fotografía',
+    pf_all:'Todas', pf_interiorismo:'Interiorismo', pf_producto:'Producto', pf_eventos:'Eventos', pf_comercial:'Comercial',
+    ph_interiorismo:'Interiorismo', ph_producto:'Producto', ph_eventos:'Evento', ph_comercial:'Comercial',
+    about_title:'Sobre mí',
+    about_p1:'Profesional del sector audiovisual, con más de 10 años de experiencia en fotografía y vídeo en España, trabajando con clientes, marcas y proyectos de diferentes sectores.',
+    about_p2:'Mi forma de trabajar se basa en una idea muy sencilla: cada cliente es diferente y cada proyecto necesita una solución diferente. Por eso me adapto al 100% a las necesidades de cada trabajo, cuidando cada detalle desde la primera idea hasta el resultado final.',
+    about_p3:'Más que simplemente hacer fotos o vídeos, busco entender lo que necesitas, aportar mi experiencia y convertir una idea en contenido que realmente transmita y conecte.',
+    contact_title_a:'¿Tienes un proyecto', contact_title_b:'en mente?',
+    contact_sub:'Cuéntame tu idea y la convertimos en contenido que conecte.',
+    foot_note:'© 2026 ZID — Videógrafo.'
+  },
+  en: {
+    nav_photo:'Photography', nav_work:'Videos', nav_about:'About', nav_contact:'Contact',
+    hero_kicker:'Photography & Video — Spain',
+    hero_sub:'Interior design, product, events and commercial. Audiovisual content that truly connects.',
+    hero_cta1:'View portfolio', hero_cta2:"Let's talk", scroll:'Scroll',
+    stat1_label:'projects delivered', stat2_label:'years of experience', stat3_label:'cities filmed in',
+    video_title:'Videos', video_count:'pieces',
+    photo_title:'Photography',
+    pf_all:'All', pf_interiorismo:'Interior Design', pf_producto:'Product', pf_eventos:'Events', pf_comercial:'Commercial',
+    ph_interiorismo:'Interior Design', ph_producto:'Product', ph_eventos:'Event', ph_comercial:'Commercial',
+    about_title:'About',
+    about_p1:'Audiovisual professional with over 10 years of experience in photography and video in Spain, working with clients, brands and projects across different industries.',
+    about_p2:"My way of working is based on a simple idea: every client is different, and every project needs a different solution. That's why I adapt 100% to the needs of each job, taking care of every detail from the first idea to the final result.",
+    about_p3:'More than just shooting photos or videos, I aim to understand what you need, bring my experience to the table, and turn an idea into content that truly connects.',
+    contact_title_a:'Got a project', contact_title_b:'in mind?',
+    contact_sub:"Tell me your idea and we'll turn it into content that connects.",
+    foot_note:'© 2026 ZID — Videographer.'
+  },
+  it: {
+    nav_photo:'Fotografia', nav_work:'Video', nav_about:'Chi sono', nav_contact:'Contatti',
+    hero_kicker:'Fotografia & Video — Spagna',
+    hero_sub:'Interior design, prodotto, eventi e commerciale. Contenuti audiovisivi che comunicano e creano connessione.',
+    hero_cta1:'Vedi portfolio', hero_cta2:'Parliamone', scroll:'Scorri',
+    stat1_label:'progetti consegnati', stat2_label:'anni di esperienza', stat3_label:'città in cui ho girato',
+    video_title:'Video', video_count:'video',
+    photo_title:'Fotografia',
+    pf_all:'Tutte', pf_interiorismo:'Interior Design', pf_producto:'Prodotto', pf_eventos:'Eventi', pf_comercial:'Commerciale',
+    ph_interiorismo:'Interior Design', ph_producto:'Prodotto', ph_eventos:'Evento', ph_comercial:'Commerciale',
+    about_title:'Chi sono',
+    about_p1:'Professionista del settore audiovisivo, con oltre 10 anni di esperienza in fotografia e video in Spagna, lavorando con clienti, marchi e progetti di settori diversi.',
+    about_p2:"Il mio modo di lavorare si basa su un'idea molto semplice: ogni cliente è diverso e ogni progetto ha bisogno di una soluzione diversa. Per questo mi adatto al 100% alle esigenze di ogni lavoro, curando ogni dettaglio dalla prima idea al risultato finale.",
+    about_p3:'Più che limitarmi a scattare foto o girare video, cerco di capire ciò di cui hai bisogno, mettere a disposizione la mia esperienza e trasformare un\'idea in un contenuto che comunichi davvero e crei connessione.',
+    contact_title_a:'Hai un progetto', contact_title_b:'in mente?',
+    contact_sub:'Raccontami la tua idea e la trasformiamo in contenuti che creano connessione.',
+    foot_note:'© 2026 ZID — Videomaker.'
+  }
+};
+let LANG = 'es';
+
+/* ---------- Build gallery ---------- */
+const gallery = document.getElementById('gallery');
+const ITEMS = [];
+CATS.forEach(cat => {
+  for (let i = 1; i <= cat.count; i++) {
+    const num = String(i).padStart(2, '0');
+    const item = {cat: cat.key, src: BASE + cat.key + '-' + num + '.jpg'};
+    ITEMS.push(item);
+    const fig = document.createElement('figure');
+    fig.className = 'ph';
+    fig.dataset.cat = cat.key;
+    fig.dataset.idx = ITEMS.length - 1;
+    fig.dataset.label = I18N[LANG]['ph_' + cat.key];
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.alt = cat.key + ' ' + num;
+    img.loading = 'lazy';
+    img.onload = () => img.classList.add('loaded');
+    fig.appendChild(img);
+    gallery.appendChild(fig);
+  }
+});
+
+/* ---------- Filters ---------- */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.ph').forEach(ph => {
+      ph.classList.toggle('hidden', f !== 'all' && ph.dataset.cat !== f);
+    });
+  });
+});
+
+/* ---------- Lightbox ---------- */
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+let visible = [];
+let cur = 0;
+function openLb(idx) {
+  visible = [...document.querySelectorAll('.ph:not(.hidden)')];
+  cur = visible.findIndex(el => +el.dataset.idx === idx);
+  showLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLb() {
+  const el = visible[cur];
+  const item = ITEMS[+el.dataset.idx];
+  lbImg.src = item.src;
+  lbCap.textContent = el.dataset.label;
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+gallery.addEventListener('click', e => {
+  const fig = e.target.closest('.ph');
+  if (fig) openLb(+fig.dataset.idx);
+});
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => { cur = (cur - 1 + visible.length) % visible.length; showLb(); });
+document.getElementById('lbNext').addEventListener('click', () => { cur = (cur + 1) % visible.length; showLb(); });
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+});
+
+/* ---------- Language ---------- */
+document.querySelectorAll('.langswitch button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    LANG = btn.dataset.lang;
+    document.documentElement.lang = LANG;
+    document.querySelectorAll('.langswitch button').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (I18N[LANG][key]) el.textContent = I18N[LANG][key];
+    });
+    document.querySelectorAll('.ph').forEach(ph => {
+      ph.dataset.label = I18N[LANG]['ph_' + ph.dataset.cat];
+    });
+  });
+});
+
+/* ---------- Nav scroll state ---------- */
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+}, {threshold: .12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
